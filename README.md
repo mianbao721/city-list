@@ -2,6 +2,8 @@
 
 一个用原生 HTML + CSS 写的城市推荐小站：四张卡片，封面全部用 CSS 画，鼠标移上去有视差动效。
 
+**在线预览：<https://mianbao721.github.io/city-list/>**
+
 ![页面预览](docs/preview.png)
 
 ## 做了什么
