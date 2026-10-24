@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    第 6 课：页面布局（居中 + 两列网格）
    结构：基础 → 页面骨架 → 列表 → 卡片 → 封面 → 悬停 → 文字
    ========================================================= */
@@ -231,7 +231,192 @@ h2 {
   color: #4a443d;
 }
 
+/* ---------- 8. 卡片可点击的样子 ---------- */
+.card {
+  cursor: pointer;
+}
+
+.card:focus-visible {
+  outline: 2px solid #d98b5f;
+  outline-offset: 3px;
+}
+
+.card-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: #b08968;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .card-more {
+  color: #8a5a2b;
+  transform: translateX(3px);
+}
+
+/* ---------- 9. 详情弹窗 ---------- */
+body.no-scroll {
+  overflow: hidden;
+}
+
+.detail {
+  width: min(560px, calc(100% - 48px));
+  max-height: 84vh;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #fffdfa;
+  color: #1e1b18;
+  box-shadow: 0 40px 90px -30px rgba(40, 30, 20, 0.55);
+  overflow: hidden;
+}
+
+.detail::backdrop {
+  background: rgba(30, 24, 18, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.detail[open] {
+  animation: detailIn 0.28s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+
+.detail-scroll {
+  max-height: 84vh;
+  overflow: auto;
+  padding: 30px 32px 32px;
+}
+
+.detail-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f2e9dd;
+  color: #5c5046;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.detail-close:hover {
+  background: #e7d8c6;
+  transform: rotate(90deg);
+}
+
+.detail-close:focus-visible {
+  outline: 2px solid #c99a6a;
+  outline-offset: 2px;
+}
+
+.detail-kicker {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #b08968;
+}
+
+.detail-name {
+  margin: 0 0 4px;
+  font-size: 30px;
+  letter-spacing: -0.01em;
+}
+
+.detail-sub {
+  margin: 0 0 18px;
+  font-size: 12.5px;
+  color: #857c70;
+  letter-spacing: 0.04em;
+}
+
+.detail-intro {
+  margin: 0 0 24px;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: #4a443d;
+}
+
+.detail-h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #9a8b7a;
+}
+
+.detail-musts {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-musts li {
+  display: grid;
+  gap: 3px;
+  padding-left: 12px;
+  border-left: 2px solid #f0d9c4;
+}
+
+.detail-musts b {
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.detail-musts span {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: #6f675e;
+}
+
+.detail-plan {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-plan li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 12px;
+  font-size: 13.5px;
+  color: #4a443d;
+}
+
+.detail-plan time {
+  color: #b08968;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-tip {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fbf3e9;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #7a6a58;
+}
+
 /* ---------- 8. 尊重「减少动态效果」的系统设置 ---------- */
+@keyframes detailIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card,
   .cover,
@@ -240,6 +425,9 @@ h2 {
     transition: none;
   }
 
+  .detail[open] {
+    animation: none;
+  }
   .card:hover,
   .card:hover .cover::before,
   .card:hover .cover::after {

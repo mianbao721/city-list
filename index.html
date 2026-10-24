@@ -12,44 +12,48 @@
     <header class="page-head">
       <p class="kicker">CITY LIST</p>
       <h1>我的城市清单</h1>
-      <p class="sub">挑一个周末就能出发的地方，四个城市，四种气质。</p>
+      <p class="sub">挑一个周末就能出发的地方，四个城市，四种气质。点开卡片看攻略。</p>
     </header>
 
     <div class="list">
 
-      <div class="card">
+      <div class="card" data-city="luoyang" tabindex="0" role="button" aria-haspopup="dialog" aria-label="查看洛阳的旅行攻略">
         <div class="cover cover-luoyang"></div>
         <div class="content">
           <h2>洛阳</h2>
           <p class="region">河南 · 中原</p>
           <p class="desc">龙门石窟看卢舍那大佛，应天门的灯亮起来，四月还有满城牡丹。</p>
+          <span class="card-more">查看攻略 →</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-city="chongqing" tabindex="0" role="button" aria-haspopup="dialog" aria-label="查看重庆的旅行攻略">
         <div class="cover cover-chongqing"></div>
         <div class="content">
           <h2>重庆</h2>
           <p class="region">重庆 · 山城</p>
           <p class="desc">轻轨从居民楼里穿过，洪崖洞的灯火映在江面上，再去吃一顿九宫格火锅。</p>
+          <span class="card-more">查看攻略 →</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-city="xian" tabindex="0" role="button" aria-haspopup="dialog" aria-label="查看西安的旅行攻略">
         <div class="cover cover-xian"></div>
         <div class="content">
           <h2>西安</h2>
           <p class="region">陕西 · 关中</p>
           <p class="desc">城墙骑行一圈 13.7 公里，大雁塔下等一场喷泉，晚上再去回民街。</p>
+          <span class="card-more">查看攻略 →</span>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-city="suzhou" tabindex="0" role="button" aria-haspopup="dialog" aria-label="查看苏州的旅行攻略">
         <div class="cover cover-suzhou"></div>
         <div class="content">
           <h2>苏州</h2>
           <p class="region">江苏 · 江南</p>
           <p class="desc">园林要挑刚开门那一小时，平江路听一段评弹，山塘街等灯亮起来。</p>
+          <span class="card-more">查看攻略 →</span>
         </div>
       </div>
 
@@ -57,5 +61,16 @@
 
   </div>
 
+  <!-- 详情弹窗：内容由 js/main.js 填进去 -->
+  <dialog id="detail" class="detail" aria-labelledby="detail-name">
+    <button class="detail-close" type="button" aria-label="关闭">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="detail-scroll"></div>
+  </dialog>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
