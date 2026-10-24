@@ -1,0 +1,248 @@
+﻿/* =========================================================
+   第 6 课：页面布局（居中 + 两列网格）
+   结构：基础 → 页面骨架 → 列表 → 卡片 → 封面 → 悬停 → 文字
+   ========================================================= */
+
+/* ---------- 1. 基础 ---------- */
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 480px at 72% -10%, #ffe9d4 0%, rgba(255, 233, 212, 0) 60%),
+    #f7f4ef;
+  background-repeat: no-repeat;
+  color: #1e1b18;
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+}
+
+/* ---------- 2. 页面骨架：限定宽度 + 水平居中 ---------- */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+}
+
+.page-head {
+  margin-bottom: 36px;
+}
+
+.kicker {
+  margin: 0 0 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: #b08968;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 38px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  margin: 0;
+  font-size: 15px;
+  color: #6f675e;
+}
+
+/* ---------- 3. 列表：两列网格 ---------- */
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* ---------- 4. 卡片 ---------- */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -18px rgba(30, 27, 24, 0.45);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 44px -22px rgba(30, 27, 24, 0.5);
+}
+
+/* ---------- 5. 封面：底色是天空，两层剪影靠伪元素画 ---------- */
+.cover {
+  position: relative;
+  height: 160px;
+  overflow: hidden;
+  transition: filter 0.5s ease;
+}
+
+/* 远近两层共用的样式 */
+.cover::before,
+.cover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  transform-origin: 50% 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+/* ---------- 6. 悬停：近景动得多，远景动得少，形成视差 ---------- */
+.card:hover .cover {
+  filter: saturate(1.08) brightness(1.03);
+}
+
+.card:hover .cover::before {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.card:hover .cover::after {
+  transform: translateY(-12px) scale(1.07);
+}
+
+/* =========================================================
+   下面四组：每个城市的配色 + 剪影
+   ========================================================= */
+
+/* ---------- 洛阳：落日 + 两层远山 ---------- */
+.cover-luoyang {
+  background:
+    radial-gradient(circle at 70% 30%, #fff3dc 0 15px, rgba(255, 243, 220, 0) 16px),
+    radial-gradient(circle at 70% 30%, rgba(255, 214, 160, 0.5) 0 58px, rgba(255, 214, 160, 0) 59px),
+    linear-gradient(180deg, #ffe9d0 0%, #f4b185 58%, #c47248 100%);
+}
+
+.cover-luoyang::before {
+  height: 58%;
+  background: linear-gradient(180deg, #b5714e, #a2603f);
+  clip-path: polygon(0 100%, 0 42%, 11% 26%, 23% 46%, 36% 22%, 50% 44%, 64% 26%, 77% 48%, 89% 32%, 100% 46%, 100% 100%);
+}
+
+.cover-luoyang::after {
+  height: 34%;
+  background: linear-gradient(180deg, #7d4530, #653827);
+  clip-path: polygon(0 100%, 0 46%, 13% 34%, 27% 56%, 41% 30%, 55% 52%, 69% 34%, 83% 54%, 100% 40%, 100% 100%);
+}
+
+/* ---------- 重庆：月亮 + 两层楼群 ---------- */
+.cover-chongqing {
+  background:
+    radial-gradient(circle at 22% 26%, #ffd8a8 0 12px, rgba(255, 216, 168, 0) 13px),
+    radial-gradient(circle at 22% 26%, rgba(255, 200, 150, 0.28) 0 52px, rgba(255, 200, 150, 0) 53px),
+    linear-gradient(180deg, #14102a 0%, #33244a 55%, #6d3f58 100%);
+}
+
+.cover-chongqing::before {
+  height: 55%;
+  background: #3b2949;
+  clip-path: polygon(0 100%, 0 55%, 7% 55%, 7% 40%, 14% 40%, 14% 62%, 21% 62%, 21% 30%, 28% 30%, 28% 50%, 35% 50%, 35% 22%, 42% 22%, 42% 48%, 49% 48%, 49% 38%, 56% 38%, 56% 58%, 63% 58%, 63% 26%, 70% 26%, 70% 46%, 77% 46%, 77% 34%, 84% 34%, 84% 54%, 91% 54%, 91% 42%, 100% 42%, 100% 100%);
+}
+
+.cover-chongqing::after {
+  height: 40%;
+  background: #1c1428;
+  clip-path: polygon(0 100%, 0 62%, 9% 62%, 9% 44%, 17% 44%, 17% 70%, 25% 70%, 25% 36%, 33% 36%, 33% 58%, 41% 58%, 41% 48%, 50% 48%, 50% 28%, 58% 28%, 58% 52%, 66% 52%, 66% 40%, 74% 40%, 74% 66%, 82% 66%, 82% 34%, 90% 34%, 90% 50%, 100% 50%, 100% 100%);
+}
+
+/* ---------- 西安：城墙垛口 + 五层塔 ---------- */
+.cover-xian {
+  background:
+    radial-gradient(circle at 78% 34%, #fff3d8 0 16px, rgba(255, 243, 216, 0) 17px),
+    radial-gradient(circle at 78% 34%, rgba(255, 220, 170, 0.45) 0 60px, rgba(255, 220, 170, 0) 61px),
+    linear-gradient(180deg, #ffe0b8 0%, #f0a870 58%, #b86945 100%);
+}
+
+.cover-xian::before {
+  height: 62%;
+  background: #b46847;
+  opacity: 0.32;
+  clip-path: polygon(0 100%, 0 58%, 14% 50%, 30% 62%, 46% 52%, 62% 64%, 78% 54%, 92% 62%, 100% 56%, 100% 100%);
+}
+
+.cover-xian::after {
+  background: #4a2a1e;
+  clip-path: polygon(
+    0% 100%, 0% 71.3%,
+    0% 66.9%, 2.5% 66.9%, 2.5% 71.3%, 5% 71.3%, 5% 66.9%, 7.5% 66.9%, 7.5% 71.3%, 10% 71.3%, 10% 66.9%,
+    12.5% 66.9%, 12.5% 71.3%, 15% 71.3%, 15% 66.9%, 17.5% 66.9%, 17.5% 71.3%, 20% 71.3%, 20% 66.9%,
+    22.5% 66.9%, 22.5% 71.3%, 25% 71.3%, 25% 66.9%, 27.5% 66.9%, 27.5% 71.3%,
+    28.1% 71.3%, 28.1% 68.8%, 30% 68.8%, 30% 62.5%, 31.9% 62.5%, 31.9% 56.3%, 33.8% 56.3%, 33.8% 50%,
+    35.6% 50%, 35.6% 43.8%, 36.9% 43.8%, 36.9% 36.3%, 37.8% 31%, 38.4% 31%, 38.4% 36.3%, 39.4% 36.3%, 39.4% 43.8%, 40.6% 43.8%, 40.6% 50%,
+    42.5% 50%, 42.5% 56.3%, 44.4% 56.3%, 44.4% 62.5%, 46.3% 62.5%, 46.3% 68.8%, 48.1% 68.8%, 48.1% 71.3%,
+    50.6% 71.3%, 50.6% 66.9%, 53.1% 66.9%, 53.1% 71.3%, 55.6% 71.3%, 55.6% 66.9%, 58.1% 66.9%, 58.1% 71.3%,
+    60.6% 71.3%, 60.6% 66.9%, 63.1% 66.9%, 63.1% 71.3%, 65.6% 71.3%, 65.6% 66.9%, 68.1% 66.9%, 68.1% 71.3%,
+    70.6% 71.3%, 70.6% 66.9%, 73.1% 66.9%, 73.1% 71.3%, 75.6% 71.3%, 75.6% 66.9%, 78.1% 66.9%, 78.1% 71.3%,
+    80.6% 71.3%, 80.6% 66.9%, 83.1% 66.9%, 83.1% 71.3%, 85.6% 71.3%, 85.6% 66.9%, 88.1% 66.9%, 88.1% 71.3%,
+    90.6% 71.3%, 90.6% 66.9%, 93.1% 66.9%, 93.1% 71.3%, 95.6% 71.3%, 95.6% 66.9%, 98.1% 66.9%, 98.1% 71.3%,
+    100% 71.3%, 100% 100%
+  );
+}
+
+/* ---------- 苏州：水乡屋顶 + 水面 ---------- */
+.cover-suzhou {
+  background:
+    radial-gradient(circle at 22% 30%, #fff8ec 0 26px, rgba(255, 248, 236, 0) 27px),
+    linear-gradient(180deg, rgba(169, 194, 200, 0) 0 78%, #a9c2c8 78% 100%),
+    linear-gradient(180deg, #dbe9ef 0%, #eef0e4 60%, #f6e2c8 100%);
+}
+
+.cover-suzhou::before {
+  background: #7d8a8c;
+  opacity: 0.45;
+  clip-path: polygon(0 78.1%, 0 68.8%, 6.3% 68.8%, 10.6% 60%, 15.6% 60%, 20% 68.8%, 28.1% 68.8%, 32.5% 55%, 38.1% 55%, 42.5% 68.8%, 53.1% 68.8%, 58.1% 63.8%, 63.8% 63.8%, 68.8% 68.8%, 78.1% 68.8%, 83.1% 58.8%, 88.8% 58.8%, 93.8% 68.8%, 100% 68.8%, 100% 78.1%);
+}
+
+.cover-suzhou::after {
+  background: #4b5153;
+  clip-path: polygon(
+    0 78.1%, 0 61.9%, 3.1% 61.9%, 6.3% 47.5%, 12.5% 47.5%, 16.3% 61.9%,
+    22.5% 61.9%, 26.3% 61.9%, 30% 43.8%, 36.9% 43.8%, 40.6% 61.9%,
+    47.5% 61.9%, 50.6% 52.5%, 56.3% 52.5%, 60% 61.9%,
+    67.5% 61.9%, 71.3% 56.3%, 76.9% 56.3%, 80.6% 61.9%,
+    88.1% 61.9%, 91.9% 45%, 98.1% 45%, 100% 61.9%, 100% 78.1%
+  );
+}
+
+/* ---------- 7. 卡片里的文字 ---------- */
+.content {
+  padding: 18px 20px 20px;
+  background: #ffffff;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+.region {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #857c70;
+  letter-spacing: 0.04em;
+}
+
+.desc {
+  margin: 0;
+  font-size: 14px;
+  color: #4a443d;
+}
+
+/* ---------- 8. 尊重「减少动态效果」的系统设置 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .cover,
+  .cover::before,
+  .cover::after {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:hover .cover::before,
+  .card:hover .cover::after {
+    transform: none;
+  }
+}
